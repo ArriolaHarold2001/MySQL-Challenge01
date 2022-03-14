@@ -110,7 +110,7 @@ VALUES("Sleepaway Camp", "1983-11-18", "6", "Robert", "Hiltzik"),
 ("Halloween", "2018-10-19", "6", "Rob", "Zombie"),
 ("Demon Slayer: Kimetsu no Yaiba the Movie: Mugen Train", "2021-04-23", "8", "Haruo", "Sotozaki");
 
-SELECT CONCAT(`director_first_name`, " " , `director_last_name`) AS "Full Name" title, release_date, rating FROM movies_copy;
+SELECT CONCAT(`director_first_name`, " " , `director_last_name`) AS "Full Name" , title, release_date, rating FROM movies_copy;
 
 SELECT * FROM movies_copy
 ORDER BY director_last_name ASC;
@@ -118,23 +118,7 @@ ORDER BY director_last_name ASC;
 SET SQL_SAFE_UPDATES = 0;
 
 DELETE FROM movies_copy WHERE
-director_last_name LIKE ("%r")
-OR
-director_last_name LIKE ("%s")
-OR
-director_last_name LIKE ("%t")
-OR
-director_last_name LIKE ("%u")
-OR
-director_last_name LIKE ("%v")
-OR
-director_last_name LIKE ("%w")
-OR
-director_last_name LIKE ("%x")
-OR
-director_last_name LIKE ("%y")
-OR
-director_last_name LIKE ("%z");
+REGEXP_LIKE (director_last_name, '[r-z]$','i');
 
 SELECT * FROM movies_copy LIMIT 3;
 
